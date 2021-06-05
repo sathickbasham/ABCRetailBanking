@@ -1,0 +1,17 @@
+<div class="row" width="100%">
+   
+    <div >
+      <div class="list-group" id="list-tab" role="tablist">
+        <div *ngFor="let user of users">
+        <a class="list-group-item list-group-item-action" routerLink="createaccount" routerLinkActive="active" *ngIf="(user.role=='admin')" >Create Account</a>
+        <a class="list-group-item list-group-item-action" routerLink="updateaccount" routerLinkActive="active" *ngIf="(user.role=='admin')" >Modify Account</a>
+        <a class="list-group-item list-group-item-action" routerLink="search" routerLinkActive="active" *ngIf="(user.role=='admin')">Search</a>
+      
+        <a class="list-group-item list-group-item-action" routerLink="viewsummary" routerLinkActive="active" *ngIf="(user.role=='user')">View Account Summary</a>
+        <a class="list-group-item list-group-item-action" routerLink="fundtransfer" routerLinkActive="active" *ngIf="(user.role=='user')">Fund Transfer</a>
+        <a class="list-group-item list-group-item-action" routerLink="viewstatement" routerLinkActive="active" *ngIf="(user.role=='user')">View Statement</a>
+        <a class="list-group-item list-group-item-action" routerLink="logout" routerLinkActive="active">Logout</a>
+      </div>
+    </div>
+    </div>
+  </div>

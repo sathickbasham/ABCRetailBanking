@@ -1,0 +1,60 @@
+<div class="card" >  
+    <div class="card-header" style="background-color: lightskyblue;">
+        View Statement
+    </div>
+    <div class="card-body">
+        <form  #ViewStatement="ngForm"> 
+            <div class="form-group">  
+                <label class="col-md-4">Account No</label>
+                <select [(ngModel)]="AccountNoBind" class="form-control" name="AccountNo" #AccountNo="ngModel" required>
+                  
+                  <option *ngFor="let account of accountInfo" value={{account.AccountNo}}>
+                    {{account.AccountNo + '-' +account.PrimaryOwner}} 
+                  </option>
+                </select>
+              </div>  
+              <div *ngIf="AccountNo.invalid && (AccountNo.dirty || AccountNo.touched)" class="alert alert-danger">  
+                <div *ngIf="AccountNo.errors!.required">  
+                    Account No is required.  
+                </div>  
+              </div>
+              <div class="form-group">
+                <label class="col-md-4">From Date</label>
+                <input type="date" name="FromDate" class="form-control form-control-rounded" #FromDate>
+              </div>  
+              
+              <div class="form-group">
+                <label class="col-md-4">To Date</label>
+                <input type="date" name="ToDate" class="form-control form-control-rounded" #ToDate>
+              </div>  
+              
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" (click)="ViewStatementFunc(FromDate,ToDate, AccountNo)">  
+                    View Statement  
+                  </button> <span></span>
+              </div>
+                  <br>
+                  <br>
+                  <table class="table table-bordered" *ngIf="isShowTable">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">Date of Transaction</th>
+                        <th scope="col">Transaction Amount</th>
+                        <th scope="col">CR/DB</th>
+                        <th scope="col">Balance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let obj of outTransactionDet">
+                            <tr>
+                                <td> {{ obj.TransactionDate }} </td>
+                                <td> {{ obj.TransactionAmount }} </td>
+                                <td> {{obj.TransactionStatus}} </td>
+                                <td> {{ obj.Balance }} </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                  </table>
+        </form>    
+    </div>
+</div>

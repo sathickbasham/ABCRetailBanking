@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-sm-8">
+
+    
+<div class="card" >  
+    <div class="card-header" style="background-color: lightskyblue;">
+        Create New Account
+      </div>
+    <div class="card-body">  
+      <form  #fundTransferForm="ngForm"  >  
+        <div class="form-group">  
+            <label class="col-md-4">From Account</label>
+            <select [(ngModel)]="AccountNoBind" class="form-control" name="AccountNo" #AccountNo="ngModel" (change)="FetchAccount(AccountNo.value)" required>
+              
+              <option *ngFor="let account of accountInfo" value={{account.AccountNo}}>
+                {{account.AccountNo + '-' +account.PrimaryOwner}} 
+              </option>
+            </select>
+          </div>  
+          <div *ngIf="AccountNo.invalid && (AccountNo.dirty || AccountNo.touched)" class="alert alert-danger">  
+            <div *ngIf="AccountNo.errors!.required">  
+                Account No is required.  
+            </div>  
+          </div>  
+          <div class="form-group">
+            <label class="col-md-4">Customer Id</label>  
+            <input type="text" readonly [(ngModel)]="CustomerIdBind" name="CustomerId" class="form-control" #CustomerId="ngModel" required>  
+          </div>  
+          <div *ngIf="CustomerId.invalid && (CustomerId.dirty || CustomerId.touched)" class="alert alert-danger">  
+            <div *ngIf="CustomerId.errors!.required">  
+              Customer Id is required.  
+            </div>  
+          </div>
+          <div class="form-group">
+            <label class="col-md-4">Primary Account Owner</label>  
+            <input type="text" readonly [(ngModel)]="PrimaryOwnerBind" name="PrimaryOwner" class="form-control" #PrimaryOwner="ngModel" required>  
+          </div>  
+          <div *ngIf="PrimaryOwner.invalid && (PrimaryOwner.dirty || PrimaryOwner.touched)" class="alert alert-danger">  
+            <div *ngIf="PrimaryOwner.errors!.required">  
+              Primary Account Owner is required.  
+            </div>  
+          </div> 
+          <div class="form-group">  
+            <label class="col-md-4">Account Type </label>
+            <select [(ngModel)]="AccountTypeBind" class="form-control" name="AccountType" #AccountType="ngModel" required>
+              <option value="0">--Select--</option>
+              <option value="1">Savings Bank Account</option>
+              <option value="2">Current Bank Account</option>
+            </select>
+          </div>  
+          <div *ngIf="AccountType.invalid && (AccountType.dirty || AccountType.touched)" class="alert alert-danger">  
+            <div *ngIf="AccountType.errors!.required">  
+                Account Type is required.  
+            </div>  
+          </div>
+          <div class="form-group">  
+            <label class="col-md-4">Branch </label>
+            <select [(ngModel)]="BranchBind" class="form-control" name="Branch" #Branch="ngModel" required>
+              <option value="0">--Select--</option>
+              <option *ngFor="let branch of Branches" value={{branch.BranchId}}>
+                {{branch.BranchName}}
+              </option>
+            </select>
+          </div>  
+          <div *ngIf="Branch.invalid && (Branch.dirty || Branch.touched)" class="alert alert-danger">  
+            <div *ngIf="Branch.errors!.required">  
+                Branch Name is required.  
+            </div>  
+          </div>  
+          <div class="form-group">  
+            <label class="col-md-4">To Account</label>
+            <select [(ngModel)]="ToAccountNoBind" class="form-control" name="ToAccountNo" #ToAccountNo="ngModel" (change)="FetchAccount(AccountNo.value)" required>
+              
+              <option *ngFor="let account of ToAccountInfo" value={{account.AccountNo}}>
+                {{account.AccountNo + '-' +account.PrimaryOwner}} 
+              </option>
+            </select>
+          </div>  
+          <div *ngIf="ToAccountNo.invalid && (ToAccountNo.dirty || ToAccountNo.touched)" class="alert alert-danger">  
+            <div *ngIf="ToAccountNo.errors!.required">  
+                To Account No is required.  
+            </div>  
+          </div>
+          <div class="form-group">
+            <label class="col-md-4">Transfer Amount</label>  
+            <input type="text" [(ngModel)]="TransferAmountBind" name="TransferAmount" class="form-control" #TransferAmount="ngModel" required>  
+          </div>  
+          <div *ngIf="TransferAmount.invalid && (TransferAmount.dirty || TransferAmount.touched)" class="alert alert-danger">  
+            <div *ngIf="TransferAmount.errors!.required">  
+              Transfer Amount is required.  
+            </div>  
+          </div>
+          <div class="form-group">  
+            <label class="col-md-4">Transaction Type </label>
+            <select [(ngModel)]="TransactionTypeBind" class="form-control" name="TransactionType" #TransactionType="ngModel" required>
+              <option value="0">--Select--</option>
+              <option value="1">NEFT</option>
+              <option value="2">IMPS</option>
+              <option value="3">RTGS</option>
+            </select>
+          </div>  
+          <div *ngIf="TransactionType.invalid && (TransactionType.dirty || TransactionType.touched)" class="alert alert-danger">  
+            <div *ngIf="TransactionType.errors!.required">  
+                Account Type is required.  
+            </div>  
+          </div>
+          <div class="form-group">
+            <label class="col-md-4">Transaction Remarks</label>  
+            <input type="text" [(ngModel)]="TransactionRemarksBind" name="TransRemarks" class="form-control" #TransRemarks="ngModel" required>  
+          </div>  
+          <div *ngIf="TransRemarks.invalid && (TransRemarks.dirty || TransRemarks.touched)" class="alert alert-danger">  
+            <div *ngIf="TransRemarks.errors!.required">  
+              Transaction Remarks is required.  
+            </div>  
+          </div> 
+        <div class="form-group">  <br>
+          <button type="submit" class="btn btn-primary" (click)="FundTransfer(fundTransferForm)">  
+            Fund Transfer  
+          </button> <span></span>
+          
+        </div>  
+        <p *ngIf="isSuccess">Fund Transferred Successfully</p>
+      </form>  
+    </div>  
+  </div>  
+</div>
+</div>
+
+
+
+  

@@ -1,0 +1,26 @@
+[
+        {
+            "username":"sathick",
+            "password":"password",
+            "role":"user",
+            "FirstName":"Sathick",
+            "LastName":"Basha",
+            "Age":36,
+            "Gender":"Male",
+            "Mobile":9677401017,
+            "Email":"sat@gmail.com",
+            "CustomerId":"1"
+        },
+        {
+            "username":"admin",
+            "password":"password",
+            "role":"admin",
+            "FirstName":"Domnic",
+            "LastName":"Xavier",
+            "Age":36,
+            "Gender":"Male",
+            "Mobile":9988998989,
+            "Email":"dom@gmail.com",
+            "CustomerId":"1"
+        }
+]

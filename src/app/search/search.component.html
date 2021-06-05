@@ -1,0 +1,54 @@
+<div class="card" >  
+    <div class="card-header" style="background-color: lightskyblue;">
+        View Statement
+    </div>
+    <div class="card-body">
+        <form  #Search="ngForm"> 
+            <div class="form-group">  
+                <label class="col-md-4">Search By</label>
+                <select [(ngModel)]="SearchByBind" class="form-control" name="SearchBy" #SearchBy="ngModel" (change)="BindLabel(SearchBy.value)" required>
+                    <option value="0">--Select--</option>
+                    <option value="1">Customer Id</option>
+                    <option value="2">Account No</option>
+                  </select>
+              </div>  
+              
+              <div class="form-group">  
+                <label  class='form-control' class="col-md-4">Search By Value</label>  
+                <input [(ngModel)]="SearchByTextBind" name = "SearchByText" class="form-control" #SearchByText="ngModel" required/>
+              </div>  
+              
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" (click)="SearchByFunc(SearchByText)">  
+                    Search  
+                  </button> <span></span>
+              </div>
+                  <br>
+                  <br>
+                  <table class="table table-bordered" *ngIf="isShowTable">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">Account Primary Owner</th>
+                        <th scope="col">Account Number</th>
+                        <th scope="col">Account Type</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Customer Id</th>
+                        <th scope="col">Balance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let obj of finAccountDet">
+                            <tr>
+                                <td> {{ obj.PrimaryOwner }} </td>
+                                <td> {{ obj.AccountNo }} </td>
+                                <td> {{obj.AccountType}} </td>
+                                <td> {{obj.Branch}} </td>
+                                <td> {{ obj.CustomerId }} </td>
+                                <td> {{ obj.InitialBalance }} </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                  </table>
+        </form>    
+    </div>
+</div>

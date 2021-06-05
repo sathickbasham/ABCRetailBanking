@@ -1,0 +1,144 @@
+<div class="row">
+    <div class="col-sm-8">
+
+    
+<div class="card" >  
+    <div class="card-header" style="background-color: lightskyblue;">
+        Modify Account
+      </div>
+    <div class="card-body">  
+      <form  #modifyAccountForm="ngForm"  >  
+        <div class="input-group">  
+            <label class="col-md-4">Account No </label>  
+            <input style="width:500px;" readonly [(ngModel)]="AccountNoBind" name = "AccountNo" class="form-control" #AccountNo="ngModel" required/>
+            <div class="input-group-btn">
+                <button class="btn btn-primary" type="submit" (click)="open(mymodal)">
+                  Search
+                </button>
+              </div>
+          </div>  
+          <div *ngIf="AccountNo.invalid && (AccountNo.dirty || AccountNo.touched)" class="alert alert-danger">  
+            <div *ngIf="AccountNo.errors!.required">  
+              Account No is required.  
+            </div>  
+          </div>
+        <div class="form-group">
+          <label class="col-md-4">Customer Id</label>  
+          <input type="text" readonly [(ngModel)]="CustomerIdBind" name="CustomerId" class="form-control" #CustomerId="ngModel" required>  
+        </div>  
+        <div *ngIf="CustomerId.invalid && (CustomerId.dirty || CustomerId.touched)" class="alert alert-danger">  
+          <div *ngIf="CustomerId.errors!.required">  
+            Customer Id is required.  
+          </div>  
+        </div> 
+        
+        <div class="form-group">  
+          <label class="col-md-4">Primary account owner </label>  
+          <input [(ngModel)]="PrimaryOwnerBind" name = "PrimaryOwner" class="form-control" #PrimaryOwner="ngModel" required/>
+        </div>  
+        <div *ngIf="PrimaryOwner.invalid && (PrimaryOwner.dirty || PrimaryOwner.touched)" class="alert alert-danger">  
+          <div *ngIf="PrimaryOwner.errors!.required">  
+            Primary account owner is required.  
+          </div>  
+        </div>
+        <div class="form-group">  
+          <label class="col-md-4">Account Type </label>
+          <select [(ngModel)]="AccountTypeBind" class="form-control" name="AccountType" #AccountType="ngModel" required>
+            <option value="0">--Select--</option>
+            <option value="1">Savings Bank Account</option>
+            <option value="2">Current Bank Account</option>
+          </select>
+        </div>  
+        <div *ngIf="AccountType.invalid && (AccountType.dirty || AccountType.touched)" class="alert alert-danger">  
+          <div *ngIf="AccountType.errors!.required">  
+              Account Type is required.  
+          </div>  
+        </div> 
+        
+          
+        <div class="form-group">  
+            <label class="col-md-4">Branch </label>
+            <select [(ngModel)]="BranchBind" class="form-control" name="Branch" #Branch="ngModel" required>
+              <option value="0">--Select--</option>
+              <option *ngFor="let branch of Branches" value={{branch.BranchId}}>
+                {{branch.BranchName}}
+              </option>
+            </select>
+          </div>  
+          <div *ngIf="Branch.invalid && (Branch.dirty || Branch.touched)" class="alert alert-danger">  
+            <div *ngIf="Branch.errors!.required">  
+                Branch Name is required.  
+            </div>  
+          </div>  
+        <div class="form-group">  
+          <label class="col-md-4">Initial Balance</label>  
+          <input [(ngModel)]="InitialBalBind" name = "InitialBalance" class="form-control" #InitialBalance="ngModel" required />  
+        </div>  
+        <div *ngIf="InitialBalance.invalid && (InitialBalance.dirty || InitialBalance.touched)" class="alert alert-danger">  
+          <div *ngIf="InitialBalance.errors!.required" >  
+            Initial Balance is required.  
+          </div>
+          <div *ngIf="InitialBalance.errors!.pattern" >  
+            Initial Balance allows only numbers.  
+          </div>
+        </div>  
+    
+        <div class="form-group">  <br>
+          <button type="submit" class="btn btn-primary" (click)="SubmitForm(modifyAccountForm)">  
+            Modify Account  
+          </button> <span></span>
+          
+        </div>  
+        <p *ngIf="isSuccess">Account Updated Successfully</p>
+      </form>  
+    </div>  
+  </div>  
+</div>
+</div>
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Search and Select Account</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <label class="col-md-4">Enter Account Number </label>  
+      <input name = "SearchAccountNo" #SearchAccountNo class="form-control" />
+      <br>
+      <button  type="submit" class="btn btn-primary" (click)="SearchAccount(SearchAccountNo.value)">  
+        Search  
+      </button>
+      <br>
+      <table class = 'table table-striped'>
+        <thead>
+          <tr>
+              <th>Select</th>
+              <th>Account No</th>
+              <th>Customer Id</th>
+              <th>Primary Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let account of AccountList; let idx = index" >
+            <tr >
+              <td> 
+                <input type="radio" name="radiogroup"  
+                [value]="account.AccountNo" (change)="onItemChange(account.AccountNo)">
+              </td>
+              <td> {{ account.AccountNo }} </td>
+              <td> {{ account.CustomerId}}  </td>
+              <td> {{ account.PrimaryOwner}}  </td>
+            </tr>
+          </ng-container>
+        </tbody>
+    </table>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="Select()">Ok</button>
+    </div>
+  </ng-template>
+
+  

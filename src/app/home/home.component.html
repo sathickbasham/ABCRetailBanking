@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-header">
+      User Information
+    </div>
+    <div class="card-body">
+        <div *ngFor="let user of users">
+            <p class="card-text">Customer Id - {{user.CustomerId}}</p>
+            <p class="card-text">User Name -  {{user.FirstName}}  {{user.LastName}} </p>
+            <p class="card-text">Gender - {{user.Gender}}</p>
+            <p class="card-text">Age - {{user.Age}}</p>
+            <p class="card-text">Mobile - {{user.Mobile}}</p>
+            <p class="card-text">Email - {{user.Email}}</p>
+            <p class="card-text">Role - {{user.role}}</p>
+        </div>
+    </div>
+  </div>
+

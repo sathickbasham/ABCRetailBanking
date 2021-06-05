@@ -1,0 +1,191 @@
+<div class="row">
+    <div class="col-sm-8">
+
+    
+<div class="card" >  
+    <div class="card-header" style="background-color: lightskyblue;">
+        Create New Account
+      </div>
+    <div class="card-body">  
+      <form  #registerForm="ngForm"  >  
+        <div class="input-group">
+          <label class="col-md-4">Customer Id</label>  
+          <input type="text" style="width:500px;" readonly [(ngModel)]="CustomerIdBind" name="CustomerId" class="form-control" #CustomerId="ngModel" required>  
+          <div class="input-group-btn">
+            <button class="btn btn-primary" type="submit" (click)="open(mymodal)">
+              Search
+            </button>
+          </div>
+        </div>  
+        <div *ngIf="CustomerId.invalid && (CustomerId.dirty || CustomerId.touched)" class="alert alert-danger">  
+          <div *ngIf="CustomerId.errors!.required">  
+            Customer Id is required.  
+          </div>  
+        </div> 
+        <div class="form-group">  
+            <label class="col-md-4">First Name </label>  
+            <input [(ngModel)]="FirstNameBind" readonly name = "FirstName" class="form-control" #FirstName="ngModel" required/>
+          </div>  
+          <div *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.touched)" class="alert alert-danger">  
+            <div *ngIf="FirstName.errors!.required">  
+              First Name is required.  
+            </div>  
+          </div>
+          <div class="form-group">  
+            <label class="col-md-4">Last Name </label>  
+            <input [(ngModel)]="LastNameBind" readonly name = "LastName" class="form-control" #LastName="ngModel" required/>
+          </div>  
+          <div *ngIf="LastName.invalid && (LastName.dirty || LastName.touched)" class="alert alert-danger">  
+            <div *ngIf="LastName.errors!.required">  
+              Last Name is required.  
+            </div>  
+          </div>
+          <div class="form-group">  
+            <label class="col-md-4">Gender </label>  
+            <input [(ngModel)]="GenderBind" readonly name = "Gender" class="form-control" #Gender="ngModel" required/>
+          </div>  
+          <div *ngIf="Gender.invalid && (Gender.dirty || Gender.touched)" class="alert alert-danger">  
+            <div *ngIf="Gender.errors!.required">  
+                Gender is required.  
+            </div>  
+          </div>  
+          <div class="form-group">  
+            <label class="col-md-4">Email</label>  
+            <input [(ngModel)]="EmailBind" readonly name = "Email" class="form-control" #Email="ngModel" required [pattern]="emailPattern"/>  
+          </div>  
+          <div *ngIf="Email.invalid && (Email.dirty || Email.touched)" class="alert alert-danger">  
+            <div *ngIf="Email.errors!.required" >  
+              Email is required.  
+            </div>
+            <div *ngIf="Email.errors!.pattern" >  
+              Email must be a valid email address.  
+            </div>  
+          </div>
+          <div class="form-group">  
+            <label class="col-md-4">Mobile</label>  
+            <input type="text" [(ngModel)]="MobileBind" readonly name= "Mobile" class="form-control" #Mobile="ngModel" required minlength="6"/>  
+          </div>  
+          <div *ngIf="Mobile.invalid && (Mobile.dirty || Mobile.touched)" class="alert alert-danger">  
+            <div *ngIf="Mobile.errors!.required">  
+                Mobile is required.  
+            </div>
+            <div *ngIf="Mobile.errors!.minlength">  
+                Mobile length must be 10.  
+              </div>  
+          </div> 
+        <div class="form-group">  
+          <label class="col-md-4">Primary account owner </label>  
+          <input [(ngModel)]="PrimaryOwnerBind" name = "PrimaryOwner" class="form-control" #PrimaryOwner="ngModel" required/>
+        </div>  
+        <div *ngIf="PrimaryOwner.invalid && (PrimaryOwner.dirty || PrimaryOwner.touched)" class="alert alert-danger">  
+          <div *ngIf="PrimaryOwner.errors!.required">  
+            Primary account owner is required.  
+          </div>  
+        </div>
+        <div class="form-group">  
+          <label class="col-md-4">Account Type </label>
+          <select [(ngModel)]="AccountTypeBind" class="form-control" name="AccountType" #AccountType="ngModel" required>
+            <option value="0">--Select--</option>
+            <option value="1">Savings Bank Account</option>
+            <option value="2">Current Bank Account</option>
+          </select>
+        </div>  
+        <div *ngIf="AccountType.invalid && (AccountType.dirty || AccountType.touched)" class="alert alert-danger">  
+          <div *ngIf="AccountType.errors!.required">  
+              Account Type is required.  
+          </div>  
+        </div> 
+        <div class="form-group">  
+          <label class="col-md-4">Account No </label>  
+          <input [(ngModel)]="AccountNoBind" name = "AccountNo" class="form-control" #AccountNo="ngModel" required/>
+        </div>  
+        <div *ngIf="AccountNo.invalid && (AccountNo.dirty || AccountNo.touched)" class="alert alert-danger">  
+          <div *ngIf="AccountNo.errors!.required">  
+            Account No is required.  
+          </div>  
+        </div>
+          
+        <div class="form-group">  
+            <label class="col-md-4">Branch </label>
+            <select [(ngModel)]="BranchBind" class="form-control" name="Branch" #Branch="ngModel" required>
+              <option value="0">--Select--</option>
+              <option *ngFor="let branch of Branches" value={{branch.BranchId}}>
+                {{branch.BranchName}}
+              </option>
+            </select>
+          </div>  
+          <div *ngIf="Branch.invalid && (Branch.dirty || Branch.touched)" class="alert alert-danger">  
+            <div *ngIf="Branch.errors!.required">  
+                Branch Name is required.  
+            </div>  
+          </div>  
+        <div class="form-group">  
+          <label class="col-md-4">Initial Balance</label>  
+          <input [(ngModel)]="InitialBalBind" name = "InitialBalance" class="form-control" #InitialBalance="ngModel" required />  
+        </div>  
+        <div *ngIf="InitialBalance.invalid && (InitialBalance.dirty || InitialBalance.touched)" class="alert alert-danger">  
+          <div *ngIf="InitialBalance.errors!.required" >  
+            Initial Balance is required.  
+          </div>
+          <div *ngIf="InitialBalance.errors!.pattern" >  
+            Initial Balance allows only numbers.  
+          </div>
+        </div>  
+    
+        <div class="form-group">  <br>
+          <button type="submit" class="btn btn-primary" (click)="SubmitForm(registerForm)">  
+            Create Account  
+          </button> <span></span>
+          
+        </div>  
+        <p *ngIf="isSuccess">Account Created Successfully</p>
+      </form>  
+    </div>  
+  </div>  
+</div>
+</div>
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Search and Select User</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <label class="col-md-4">Enter Customer Mobile Number </label>  
+      <input name = "SearchMobileNumber" #SearchMobile class="form-control" />
+      <br>
+      <button  type="submit" class="btn btn-primary" (click)="SearchUser(SearchMobile.value)">  
+        Search  
+      </button>
+      <br>
+      <table class = 'table table-striped'>
+        <thead>
+          <tr>
+              <th>Select</th>
+              <th>Customer Id</th>
+              <th>Customer Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let user of userList; let idx = index" >
+            <tr >
+              <td> 
+                <input type="radio" name="radiogroup"  
+                [value]="user.CustomerId" (change)="onItemChange(user.CustomerId)">
+              </td>
+              <td> {{ user.CustomerId }} </td>
+              <td> {{ user.FirstName}}  {{user.LastName}} </td>
+            </tr>
+          </ng-container>
+        </tbody>
+    </table>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="Select()">Ok</button>
+    </div>
+  </ng-template>
+
+  

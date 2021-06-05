@@ -1,0 +1,48 @@
+<div class="container">
+    <p class="h2">View Account Summary</p>
+<table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Account No</th>
+        <th scope="col">Balance</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let obj of summary">
+            <tr>
+                <td> {{ obj.AccountNo }} </td>
+                <td> {{ obj.Balance }} </td>
+                <td><button type="submit" class="btn btn-primary" (click)="Details(obj.AccountNo)">  
+                    Details  
+                  </button></td>
+            </tr>
+        </ng-container>
+    </tbody>
+  </table>
+<br>
+<br>
+<div *ngIf="isNoRecords">
+    <p class="h4">No Records Found</p>
+</div>
+<table class="table table-bordered" *ngIf="isShowTable">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Date of Transaction</th>
+        <th scope="col">Transaction Amount</th>
+        <th scope="col">CR/DB</th>
+        <th scope="col">Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let obj of outTransactionDet">
+            <tr>
+                <td> {{ obj.TransactionDate }} </td>
+                <td> {{ obj.TransactionAmount }} </td>
+                <td> {{obj.TransactionStatus}} </td>
+                <td> {{ obj.Balance }} </td>
+            </tr>
+        </ng-container>
+    </tbody>
+  </table>
+</div>
